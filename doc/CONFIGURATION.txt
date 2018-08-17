@@ -1,0 +1,148 @@
+# Basic configuration instructions for warp_text.
+# These instructions are for basic project configuration.
+# Before reading this, make sure that all packages are installed and that apache
+# and mysql are properly configured.
+# The instructions for that are in doc/INSTALLATION.txt 
+
+1. Loging for the first time
+
+The default installation of warp_text comes with a pre-set admin user. The
+credentials for it are warp_admin / warp_text
+Please make sure to change the password as soon as you log in.
+
+The admin interface has three different panels - dataset, users, and layers.
+
+
+2. User management
+
+- In the user management section of the interface you can add, modify and delete
+  users on the system.
+
+- When creating or modifying an user, the following options have to be set:
+	- username (unique)
+
+	- password
+
+	- collaboration mode - you can configure multiple users to collaborate
+	  together. That is, the users will be assigned the same pairs to
+	  annotate and will be able to see each others' annotation. Unless you
+	  know what you are doing and you REALLY need this feature, it is highly
+	  recommended to leave this option to "Independent".
+
+	- admin - admin users have access to the admin panel. non-admin users
+	  have access to the annotator panel. Admin users can't annotate.
+
+	- disabled - disabled users will NOT be able to log in the system.
+	  However all existing annotations are kept in the system and can be
+	  exported when "export" function is used. The users ca be re-enabled at
+	  a later point.
+
+- When deleting a user, ALL data associated with that user (including
+  annotations) will be PERMANENTLY deleted. This action is irreversible, so
+  proceed carefully
+
+- Make sure to change the default admin password
+
+
+3. Layer management
+
+- In the layer management section of the interface, you can add, modify,
+  reorder, and delete layers. At each layer you can confgure relations.
+
+- When creating or modifying a layer, the following options have to be set:
+	- Layer name (unique)
+
+	- Layer type - currently there are only two layer types: ``textual'' and
+	  ``atomic''. ``Textual'' annotates relations that affect the whole
+	  text. ``Atomic'' annotates relations that have more fine-grained
+	  scope.
+
+	- Text separator - the system automatically splits the text to ``elements''
+	  that can be selected and annotated. The text is split by specified
+	  separator. If no text separator is specified, the system assumes the 
+	  text separator to be whitespace. Each token will be a ``unit''. If a
+	  custom separation is needed (ex.: phrases, sentences, paragraphs) the
+	  corpus needs to be pre-processed prior to insertion in warp-text. Each
+	  of the ``elements'' has to be separated by the specified separator (for
+	  example EOS). 
+	  N.B.: Text separators configured by any layer are considered "special"
+	  strings and are ignored at annotation time (i.e. annotators will NOT
+	  see them and will NOT be able to annotate them). Make sure to use
+	  separator strings that would not appear naturally in the text.
+
+	- Sentence lock - by default, annotators are able to slect ``elements''
+	  from both sentences. You can restrict them to only be able to select
+	  from one while the other is displayed just for information.
+
+	- Show previous layers - if this option is enabled, the annotation at
+	  previous layers will be displayed.
+	  N.B.: At the current version, only the annotation at previous layers
+	  of type ``textual'' will be displayed.
+
+	- disabled - if a layer is disabled, it will not appear during the
+	  annotation process. However all relations and annotation already
+	  performed at that layer are kept and will be exported.
+
+- When configuring relations at each layer  (configure), the following options
+  have to be set:
+
+	For textual layer:
+	- Option - the name of the relation OR the option
+	- Short name - short name (for display purposes)
+	- Relation - the relation that this option is assigned to
+	i.e.: to have a relation "Textual Entailment" with options "Entailment",
+	"Contradiction", and "Unknown", the following has to be configured:
+	  - Textual Entailment (relation - relation)
+	  - Entailment (relation - Textual Entailment)
+	  - Contradiction (relation - Textual Entailment)
+	  - Unknown (relation - Textual Entailment)
+
+	For atomic layer:
+	- Relation - the name of the relation (or meta-relation)
+	- Short name - short name (for display purposes)
+	- Meta relation - the category of the relation (i.e. lexical
+	  substitution can belong to ``lexical'' category).
+	- Key - Normally, annotators can annotate only one set of ``elements''
+	  from each text. If key = 1, they can annotate two. (i.e. they can
+	  annotate the whole portion of the text affected by ``Discourse
+	  change'' and then separately annotate the specific tokens that are
+	  changed.
+
+- When deleting a layer, ALL data associated with that layer (including
+  annotations and relations) will be PERMANENTLY deleted. This action is 
+  irreversible, so proceed carefully
+
+
+4. Dataset management
+
+- In the dataset management you can see statistics of the annotation, assign
+  pairs to users, import raw corpus for annotation and export the results of the
+  annotation.
+
+- The main dataset page (opened also when log in) shows overall statistics for
+  the interface (number of pairs, users, annotations).
+
+- Annotation statistics show more detailed statistics for the annotation
+  process: number (and ids) of pairs assigned to each user, number (and ids) of
+  the already annotated pairs
+
+- Pair assignment displays all ranges of pairs currently assigned to all
+  non-admin users (admin users can't be assigned pairs) and allows to assign or
+  de-assign pairs.
+	- To assign or de-assign a range of pairs, specify the first pair id,
+	  the last pair id, and the action (assign or de-assign)
+	- N.B.: pairs are assigned to users. If two or more users are in
+	  colaborative mode, the pool of assigned pairs for the collaborating
+	  group is the union of all pairs.
+	- De-assigning pairs from a user also removes ALL annotation performed
+	  on these pairs.
+	- Removing a user from a collaboration group does NOT remove the
+	  annotation performed by that user while part of the group.
+
+- Importing a corpus expects a tab separated csv file
+	- The file must have 7 fields: label, text1_id, text2_id, text_1,
+	  text_2, description_1, description_2;
+	- The content of the file will be automatically appended to the dataset
+	  table.
+	- Make sure your file is in UTF8 format !
+

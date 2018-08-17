@@ -1,0 +1,80 @@
+# Installation instructions for warp_text
+# These instructions are for setting up the basic configuration on Debian 9.0
+# The system uses standard implementations of PHP 7 and MariaDB 10.1
+# For quetions or problems contact the first author of the paper
+
+1. Install required packages
+
+- Install apache
+apt-get install apache2
+
+- Install php 7.0 for apache
+apt-get install libapache2-mod-php
+
+- Install mysql server (mariadb in the case of debian 9)
+apt-get install mysql-server
+
+- Install php for mysql
+apt-get install php-mysql
+
+- Install php-zip and php-dom
+apt-get install php-zip
+apt-get install php-dom
+
+2. Copy the github repo in /var/www/warp (or another folder of your choise)
+
+3. Configure and import the database
+
+- log in as root on the database (use your favorite mysql client, make sure your root has strong password)
+
+- create database for warp_text
+create database warp_db;
+
+- create user and grant full privileges
+create user 'warp_user'@'localhost' identified by 'SOME_STRONG_PASSWORD';
+grant all privileges on warp_db.* to 'warp_user'@'localhost';
+flush privileges;
+
+- insert the core database (located in db/warp.sql)
+/var/www/warp/db# mysql -u root -p warp_db < warp.sql
+
+- open inc/config.inc and fill in the correct DBUSER and DBPASS
+
+4. Configure apache, php, logging
+
+- Copy the apache config file (apache/010-warp.conf) to /etc/apache/sites-available/
+/var/www/warp# cp apache/010-warp.conf /etc/apache2/sites-available/
+
+- Make sure to update your ServerName and ServerAdmin in the file (/etc/apache/sites-available/010-warp.conf)
+
+- Create the custom folder for the logs (apache may crash if you skip that)
+/var/www/warp# mkdir -p /var/log/apache2/warp/
+
+- Create the logfile for the database logging
+/var/www/warp# touch /var/log/apache2/warp-sql.log
+
+- Fix the permissions on the log files
+/var/www/warp# chown www-data:www-data /var/log/apache2/ -R
+/var/www/warp# chmod 755 /var/log/apache2/warp-sql.log
+
+- Open /etc/php/7.0/apache2/php.ini and change "short_open_tag" to On (N.B.: the site WILL crash if you don't do that)
+
+- Enable mod_rewrite for apache
+a2enmod rewrite
+
+- Enable the site config
+a2ensite 010-warp.conf
+
+- If it is the only site you are running, you might want to disable the default site (OPTIONAL)
+a2dissite 000-default.conf
+
+- Restart apache to load the new config
+service apache2 restart
+
+5. If your server is behind firewall, make sure to open ports 80 and 443
+
+6. If you are using HTTPS and SSL certificate (highly recommended) make sure to configure apache to use the correct SSL and redirect all traffic from port 80 to port 443
+
+7. Open the web-address of the server and verify that the page is loading correctly
+
+8. Read the instructions about setting up a project (doc/CONFIGURATION.txt)
