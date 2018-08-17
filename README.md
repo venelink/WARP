@@ -18,7 +18,8 @@ Organization
 
 If you use this tool, please cite
 
-```@InProceedings{C18-2029,
+```
+@InProceedings{C18-2029,
   author = 	"Kovatchev, Venelin
 		and Marti, Toni
 		and Salamo, Maria",
