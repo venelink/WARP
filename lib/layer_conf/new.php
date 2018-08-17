@@ -87,7 +87,7 @@ INSERT INTO
 	(layer_name, layer_type, text_separator, display_prev, lock_text,
 	parrent, child, source_table, disabled, layer_order)
 VALUES
-	('{$l_name}', '{$layer_type}','{$mod->vars->i_sep}','{$mod->vars->i_prev}','{$mod->vars->i_lock}',
+	('{$l_name}', '{$layer_type}','{$mod->vars->i_sep}',{$mod->vars->i_prev},'{$mod->vars->i_lock}',
 	0,0,'dataset',0,'{$ord->last}')
 EOF;
 		db_query($sql);
