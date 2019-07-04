@@ -1,4 +1,11 @@
-# WARP-Text
+# Fork of WARP-Text
+Wrapped up WARP-Text in a Docker container.
+
+Run with `docker run -d -p '80:80' warp`
+
+Extract database with `TODO`.
+
+## WARP-Text
 The Warp-Text annotation tool
 
 This is the initial version of the WARP-Text annotation tool.
