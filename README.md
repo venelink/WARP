@@ -1,9 +1,7 @@
 # Fork of WARP-Text
 Wrapped up WARP-Text in a Docker container.
 
-Run with `docker run -d -p '80:80' warp`
-
-Extract database with `TODO`.
+Run, save db, restore db with provided scripts (`start.sh`, `dump.sh`, `restore.sh`)
 
 ## WARP-Text
 The Warp-Text annotation tool
