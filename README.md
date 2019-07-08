@@ -4,8 +4,8 @@ Wrapped up WARP-Text in a Docker container.
 Commands:
 
 - `./create.sh` - makes a new docker container.
-- `docker warp start` - starts an existing container.
-- `docker warp stop` - stops an existing container.
+- `docker start warp` - starts an existing container.
+- `docker stop warp` - stops an existing container.
 - `docker rm -f warp` - deletes the docker container.
 
 - `./dump.sh` - extracts the mysql database from the running warp container.
