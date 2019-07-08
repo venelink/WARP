@@ -11,7 +11,6 @@ Commands:
 - `./dump.sh` - extracts the mysql database from the running warp container.
 - `./restore.sh` - inserts a database dump into the running warp container.
 
-
 ## WARP-Text
 The Warp-Text annotation tool
 
