@@ -1,9 +1,16 @@
 # Fork of WARP-Text
 Wrapped up WARP-Text in a Docker container.
 
-Run with `docker run -d -p '80:80' warp`
+Commands:
 
-Extract database with `TODO`.
+- `./create.sh` - makes a new docker container.
+- `docker warp start` - starts an existing container.
+- `docker warp stop` - stops an existing container.
+- `docker rm -f warp` - deletes the docker container.
+
+- `./dump.sh` - extracts the mysql database from the running warp container.
+- `./restore.sh` - inserts a database dump into the running warp container.
+
 
 ## WARP-Text
 The Warp-Text annotation tool
