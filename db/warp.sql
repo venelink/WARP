@@ -230,6 +230,7 @@ INSERT INTO `relations` VALUES (7,'Extremes',1,'Extremes',0,0);
 INSERT INTO `relations` VALUES (71,'Identical',1,'identical',7,0);
 INSERT INTO `relations` VALUES (72,'Entailment',1,'entailment',7,0);
 INSERT INTO `relations` VALUES (73,'Non-Paraphrase',1,'non_paraphrase',7,0);
+INSERT INTO `relations` VALUES (74,'Unknown',1,'unknown',7,0);
 /*!40000 ALTER TABLE `relations` ENABLE KEYS */;
 UNLOCK TABLES;
 
