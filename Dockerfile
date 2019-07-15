@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:9
 
 RUN apt-get update
 RUN apt-get -y install apache2 libapache2-mod-php mariadb-server-10.1 php-mysql php-zip php7.0-xml git
@@ -17,7 +17,7 @@ RUN a2enmod rewrite
 RUN a2ensite 010-warp.conf
 RUN a2dissite 000-default.conf
 RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
-
+RUN apt-get -y install vim
 WORKDIR /var/www/warp
 EXPOSE 80
 CMD service mysql restart && apache2ctl -D FOREGROUND
