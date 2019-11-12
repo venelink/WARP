@@ -1,3 +1,8 @@
+--
+-- Initial database for paraphrase tagging
+--
+
+
 -- MySQL dump 10.16  Distrib 10.1.26-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: warp_db
@@ -135,6 +140,7 @@ CREATE TABLE `layers` (
 
 LOCK TABLES `layers` WRITE;
 /*!40000 ALTER TABLE `layers` DISABLE KEYS */;
+INSERT INTO `layers` VALUES (0,'paraphrase_types',2,0,0,'dataset',' ',1,0,0,0);
 /*!40000 ALTER TABLE `layers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,6 +193,44 @@ CREATE TABLE `relations` (
 
 LOCK TABLES `relations` WRITE;
 /*!40000 ALTER TABLE `relations` DISABLE KEYS */;
+INSERT INTO `relations` VALUES (1,'Morpology',1,'Morpology',0,0);
+INSERT INTO `relations` VALUES (11,'Inflectional Changes',1,'mor_inflectional',1,0);
+INSERT INTO `relations` VALUES (12,'Modal-Verb Changes',1,'more_modal_verb',1,0);
+INSERT INTO `relations` VALUES (13,'Derivational Changes',1,'mor_derivational',1,0);
+
+INSERT INTO `relations` VALUES (2,'Lexicon',1,'Lexicon',0,0);
+INSERT INTO `relations` VALUES (21,'Spelling Changes',1,'lex_spelling',2,0);
+INSERT INTO `relations` VALUES (22,'Same-Polarity Substitutions',1,'lex_same_polarity',2,0);
+INSERT INTO `relations` VALUES (23,'Synthetic/Analytic Substitutions',1,'lex_synt_ana',2,0);
+INSERT INTO `relations` VALUES (24,'Opposite-Polarity Substitutions',1,'lex_opposite_polarity',2,0);
+INSERT INTO `relations` VALUES (25,'Converse Substitutions',1,'lex_inverse',2,0);
+
+INSERT INTO `relations` VALUES (3,'Syntax',1,'Syntax',0,0);
+INSERT INTO `relations` VALUES (31,'Diathesis Alternations',1,'sny_diathesis',3,0);
+INSERT INTO `relations` VALUES (32,'Negation Switching',1,'syn_negation',3,0);
+INSERT INTO `relations` VALUES (33,'Ellipsis',1,'syn_ellipsis',3,0);
+INSERT INTO `relations` VALUES (34,'Coordination Changes',1,'syn_coordination',3,0);
+INSERT INTO `relations` VALUES (35,'Subordination-and-Nesting Changes',1,'syn_subord_nesting',3,0);
+
+INSERT INTO `relations` VALUES (4,'Discourse',1,'Discourse',0,0);
+INSERT INTO `relations` VALUES (41,'Punctuation Changes',1,'dis_punctuation',4,0);
+INSERT INTO `relations` VALUES (42,'Direct/Indirect-style Aternations',1,'dis_direct_indirect',4,0);
+INSERT INTO `relations` VALUES (43,'Sentence-Modality Changes',1,'dis_sent_modality',4,0);
+INSERT INTO `relations` VALUES (44,'Syntax/Discourse-structure Changes',1,'syn_dis_structure',4,0);
+
+INSERT INTO `relations` VALUES (5,'Semantics',1,'Semantics',0,0);
+INSERT INTO `relations` VALUES (51,'Semantics-based Changes',1,'semantics',5,0);
+
+INSERT INTO `relations` VALUES (6,'Miscellaneous',1,'Miscellaneous',0,0);
+INSERT INTO `relations` VALUES (61,'Change of Format',1,'format',6,0);
+INSERT INTO `relations` VALUES (62,'Change of Order',1,'order',6,0);
+INSERT INTO `relations` VALUES (63,'Addition/Deletion',1,'addition_deletion',6,0);
+
+INSERT INTO `relations` VALUES (7,'Extremes',1,'Extremes',0,0);
+INSERT INTO `relations` VALUES (71,'Identical',1,'identical',7,0);
+INSERT INTO `relations` VALUES (72,'Entailment',1,'entailment',7,0);
+INSERT INTO `relations` VALUES (73,'Non-Paraphrase',1,'non_paraphrase',7,0);
+INSERT INTO `relations` VALUES (74,'Unknown',1,'unknown',7,0);
 /*!40000 ALTER TABLE `relations` ENABLE KEYS */;
 UNLOCK TABLES;
 
